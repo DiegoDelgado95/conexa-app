@@ -1,0 +1,31 @@
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./apps/api/Dockerfile
+      target: development
+    container_name: conexa-api
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+    command: npm run start:dev api
+    networks:
+      - conexa_network
+  negocios:
+    build:
+      context: ./
+      dockerfile: ./apps/api/Dockerfile
+      target: development
+    container_name: conexa-negocios
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '4000:4000'
+    command: npm run start:dev negocios
+    networks:
+      - conexa_network
+networks:
+    conexa_network:
